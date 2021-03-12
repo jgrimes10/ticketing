@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: external-mongo-srv
+spec:
+  type: NodePort
+  selector:
+    app: auth-mongo
+  ports:
+    - port: 27017
+      nodePort: 32463
+      name: external-mongodb

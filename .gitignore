@@ -1,0 +1,42 @@
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
+
+# npm
+node_modules
+package-lock.json
+*.gz
+
+# Logs
+logs
+*.log
+
+# Debug log from npm
+npm-debug.log
+
+
+# Coveralls
+coverage
+
+# Benchmarking
+benchmarks/graphs
+
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
+.env
