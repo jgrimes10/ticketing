@@ -2,8 +2,18 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
 import { app } from '../app';
+import request from 'supertest';
 
 let mongo: MongoMemoryServer;
+
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace NodeJS {
+        interface Global {
+            signUp(): Promise<string[]>;
+        }
+    }
+}
 
 // before everything starts
 beforeAll(async () => {
@@ -41,3 +51,18 @@ afterAll(async () => {
     // close the mongoose connection
     await mongoose.connection.close();
 });
+
+global.signUp = async () => {
+    const email = 'test@test.com';
+    const password = 'password';
+
+    const response = await request(app)
+        .post('/api/users/signup')
+        .send({
+            email,
+            password,
+        })
+        .expect(201);
+
+    return response.get('Set-Cookie');
+};
